@@ -4,3 +4,8 @@
 .DS_Store
 *.pyc
 __pychache__
+.env
+logs
+media_cdn
+static_cdn
+db.sqlite3

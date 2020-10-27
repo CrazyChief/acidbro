@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+
+  web:
+    restart: unless-stopped
+    build: .
+    volumes:
+      - .:/usr/src/acidbro/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    restart: unless-stopped
+    image: postgres:12.0-alpine
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_USER=acidbro
+      - POSTGRES_PASSWORD=acidbro.
+      - POSTGRES_DB=acidbrodb
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5433:5432"
+
+#  nginx:
+#    restart: always
+#    build: ./nginx/
+#    volumes:
+#      - ./nginx/:/etc/nginx/conf.d
+#      - ./logs/:/code/logs
+#      - static:/code/static_cdn
+#      - media:/code/media_cdn
+#    ports:
+#      - "1221:80"
+#    links:
+#      - web
+
+volumes:
+  postgres_data:
