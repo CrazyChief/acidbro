@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <title>Title {{ LANGUAGE_CODE }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ site_settings.favicon.url }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% if site_settings.favicon %}{{ site_settings.favicon.url }}{% endif %}">
 
   {% block css %}
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
