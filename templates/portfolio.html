@@ -1,114 +1,43 @@
-{% extends 'base.html' %}
 {% load i18n static %}
 
 {% block page_content %}
-
-		<div class="facts">
-			<div class="wrapper">
-				<h3 class="title underl animated replace-fadeInUp">Key facts as at 30 September 2019</h3>
-				<div class="facts-all justify">
-					<div class="facts-item">
-						<div class="facts-name animated replace-fadeInUp">Outperformance of IPD MSCI Benchmark Index over past 6 months</div>
-						<div class="facts-progress01">
-							<div class="facts-percent">1.4 <span>%</span></div>
-						</div>
-						<div class="fline01"></div>
-						<div class="fline02"></div>
-						<div class="fline03"></div>
-						<div class="fline04"></div>
-						<div class="fline05"></div>
-						<div class="fline06"></div>
-					</div>
-					<div class="facts-item">
-						<div class="facts-name animated replace-fadeInUp">Outperformance of IPD MSCI Benchmark Index over past 6 months</div>
-						<div class="facts-progress02">
-							<div class="facts-percent">15.4 <span>%</span></div>
-						</div>
-						<div class="fline01"></div>
-						<div class="fline02"></div>
-						<div class="fline03"></div>
-						<div class="fline04"></div>
-						<div class="fline05"></div>
-						<div class="fline06"></div>
-					</div>
-					<div class="facts-item">
-						<div class="facts-name animated replace-fadeInUp">Outperformance of IPD MSCI Benchmark Index over past 6 months</div>
-						<div class="facts-progress03">
-							<div class="facts-percent">45.4 <span>%</span></div>
-						</div>
-						<div class="fline01"></div>
-						<div class="fline02"></div>
-						<div class="fline03"></div>
-						<div class="fline04"></div>
-						<div class="fline05"></div>
-						<div class="fline06"></div>
-					</div>
-					<div class="facts-item">
-						<div class="facts-name animated replace-fadeInUp">Outperformance of IPD MSCI Benchmark Index over past 6 months</div>
-						<div class="facts-progress04">
-							<div class="facts-percent">99.4 <span>%</span></div>
-						</div>
-						<div class="fline01"></div>
-						<div class="fline02"></div>
-						<div class="fline03"></div>
-						<div class="fline04"></div>
-						<div class="fline05"></div>
-						<div class="fline06"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="sector">
-			<div class="wrapper">
-				<div class="half-cont">
-					<div class="half-left">
-						<h3 class="title animated replace-fadeInUp">Sector weightings</h3>
-					</div>
-					<div class="half-right">
-						<p class="animated replace-fadeInUp">The standard chunk of Lorem Ipsum used since
-						the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also translation by H. Rackham</p>
-					</div>
-				</div>
-			</div>
-			<div class="sector-all">
-				<div class="half-cont wrapper">
-					<div class="half-left">
-						<div class="sector-item animated replace-bounceInUp" style="animation-duration:2s;">
-							<div class="sector-img" style="background:url('img/sector.jpg')"></div>
-							<div class="sector-name">Commerce  <span>36%</span></div>
-							<div class="sector-descr">The Company owns a range of industrial assets, the most significant being
-								multi-let estates including Milton Keynes and Leeds, which are positively
-								impacted by structural trends and where there are significant asset
-							management opportunities to capture rental growth.</div>
-						</div>
-						<div class="sector-item animated replace-bounceInUp" style="animation-duration:2s;">
-							<div class="sector-img" style="background:url('img/sector.jpg')"></div>
-							<div class="sector-name">Commerce  <span>36%</span></div>
-							<div class="sector-descr">The Company owns a range of industrial assets, the most significant being
-								multi-let estates including Milton Keynes and Leeds, which are positively
-								impacted by structural trends and where there are significant asset
-							management opportunities to capture rental growth.</div>
-						</div>
-					</div>
-					<div class="half-right">
-						<div class="sector-item animated replace-bounceInUp" style="animation-delay:0.5s;" style="animation-duration:2s;">
-							<div class="sector-img" style="background:url('img/sector.jpg')"></div>
-							<div class="sector-name">Commerce  <span>36%</span></div>
-							<div class="sector-descr">The Company owns a range of industrial assets, the most significant being
-								multi-let estates including Milton Keynes and Leeds, which are positively
-								impacted by structural trends and where there are significant asset
-							management opportunities to capture rental growth.</div>
-						</div>
-						<div class="sector-item animated replace-bounceInUp" style="animation-delay:0.5s;" style="animation-duration:2s;">
-							<div class="sector-img" style="background:url('img/sector.jpg')"></div>
-							<div class="sector-name">Commerce  <span>36%</span></div>
-							<div class="sector-descr">The Company owns a range of industrial assets, the most significant being
-								multi-let estates including Milton Keynes and Leeds, which are positively
-								impacted by structural trends and where there are significant asset
-							management opportunities to capture rental growth.</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<!--title, description, link, image of project-->
+  <div class="sector">
+    <div class="wrapper">
+      <div class="half-cont">
+        <div class="half-left">
+          <h3 class="title animated replace-fadeInUp" style="color: {{ object.title_color }};">{{ object.title }}</h3>
+        </div>
+        <div class="half-right">
+          <p class="animated replace-fadeInUp">{{ object.text|safe }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="sector-all">
+      <div class="half-cont wrapper">
+        <div class="half-left">
+          <!--sector_item.html-->
+          <div class="sector-item animated replace-bounceInUp" style="animation-duration:2s;">
+            <div class="sector-img" style="background:url({% static 'img/sector.jpg' %})"></div>
+            <div class="sector-name">Commerce  <span>36%</span></div>
+            <div class="sector-descr">The Company owns a range of industrial assets, the most significant being
+              multi-let estates including Milton Keynes and Leeds, which are positively
+              impacted by structural trends and where there are significant asset
+            management opportunities to capture rental growth.</div>
+          </div>
+        </div>
+        <div class="half-right">
+          <!--sector_item.html-->
+          <div class="sector-item animated replace-bounceInUp" style="animation-delay:0.5s;" style="animation-duration:2s;">
+            <div class="sector-img" style="background:url({% static 'img/sector.jpg' %})"></div>
+            <div class="sector-name">Commerce  <span>36%</span></div>
+            <div class="sector-descr">The Company owns a range of industrial assets, the most significant being
+              multi-let estates including Milton Keynes and Leeds, which are positively
+              impacted by structural trends and where there are significant asset
+            management opportunities to capture rental growth.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

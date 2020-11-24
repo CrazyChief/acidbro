@@ -11,8 +11,8 @@ then
     echo "PostgreSQL started"
 fi
 
-python manage.py collectstatic --no-input
 python manage.py migrate
+python manage.py collectstatic --no-input
 python manage.py runserver 0.0.0.0:8000
 # gunicorn acidbro.wsgi:application --bind 0.0.0.0:8000
 

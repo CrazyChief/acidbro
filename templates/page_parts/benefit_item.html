@@ -1,0 +1,9 @@
+<div class="benefit-item animated replace-zoomIn">
+  {% if object.background_image %}
+    <object type="image/{{ bg_type }}" data="{{ object.background_image.url }}"></object>
+  {% else %}
+    <object type="image/svg+xml" data="{{ default_icon }}"></object>
+  {% endif %}
+  <h4 class="title" style="color: {{object.title_color}};">{{ object.title }}</h4>
+  <p>{{ object.text|safe }}</p>
+</div>

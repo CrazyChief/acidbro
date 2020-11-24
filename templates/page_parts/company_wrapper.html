@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="company replace-fadeInUp">
+  <div class="wrapper">
+    <div class="half-cont">
+      <div class="half-left animated replace-fadeInLeft">
+        <h3 class="title" style="color: {{ object.title_color }};">{{ object.title }}</h3>
+        <p>{{ object.text|safe }}</p>
+        <div class="line"></div>
+        <span>{{ object.subtitle }}</span>
+        {% with object.navigationlinks_set.first as nav_link %}
+          {% if nav_link %}
+            <a href="{{ nav_link.get_link }}" class="but head-link">{{ nav_link.name }}</a>
+          {% endif %}
+        {% endwith %}
+      </div>
+      <div class="half-right animated replace-fadeInRight">
+        <div class="sertificate">
+          <img src="{% if object.background_image %}{{ object.background_image.url }}{% else %}{% static 'img/doc.jpg'%}{% endif %}" alt="{{ object.title }}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

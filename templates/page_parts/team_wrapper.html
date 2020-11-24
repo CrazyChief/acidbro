@@ -1,0 +1,34 @@
+{% load static %}
+{# reviews goes here #}
+
+<div class="team">
+  <div class="wrapper">
+    <div class="half-cont">
+      <div class="half-left">
+        <h3 class="title animated replace-fadeInUp" style="color: {{ object.title_color }};">{{ object.title }}</h3>
+      </div>
+      <div class="half-right">
+        <h4 class="subtitle animated replace-fadeInUp">{{ object.subtitle }}</h4>
+        <p class="animated replace-fadeInUp">{{ object.text }}</p>
+      </div>
+    </div>
+    <div class="team-slide animated replace-bounceInUp" style="animation-duration:2s;">
+      {% with object.review_set.all as reviews %}
+        {% for review in reviews %}
+          {% if review.publish %}
+            {% include 'page_parts/team_item.html' with site_settings=site_settings object=review %}
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+{#      <div class="team-item">#}
+{#        <div class="team-img" style="background:url('img/team.jpg');background-position:left top;background-size:cover"></div>#}
+{#        <div class="team-descr">#}
+{#          <div class="name">Duncan Owen</div>#}
+{#          <div class="about">Global Head of Real Estate and chairman of the invetment commitee</div>#}
+{#          <div class="line"></div>#}
+{#        </div>#}
+{#        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>#}
+{#      </div>#}
+    </div>
+  </div>
+</div>

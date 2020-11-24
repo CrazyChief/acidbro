@@ -1,0 +1,10 @@
+<div class="investor" {% if object.background_image %}style="background: url('{{ object.background_image.url }}') no-repeat;"{% endif %}>
+  <div class="inner-investor">
+  </div>
+  <div class="wrapper">
+    <h3 class="title animated replace-fadeInUp" style="color: {{ object.title_color }};">
+      <span style="display: block; width: 50%; word-break: keep-all;">{{ object.title }}</span>
+    </h3>
+    {{ object.children.first.text|safe }}
+  </div>
+</div>

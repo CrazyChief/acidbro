@@ -1,0 +1,64 @@
+{% load core_tags %}
+
+<div class="benefit">
+  <div class="benefit-top">
+    <div class="bt-title">
+      {% if site_settings.logo %}
+          <object type="image/{% check_img site_settings.logo.url %}" class="icon-logo animated replace-fadeInUp" data="{{ site_settings.logo.url }}"></object>
+      {% else %}
+        <object type="image/svg+xml" class="icon-logo animated replace-fadeInUp" data="{% static 'img/svg/icon-logo.svg'%}"></object>
+      {% endif %}
+      <h3 class="title animated replace-fadeInUp">
+        <span style="display: block;margin: auto;width: 40%;word-break: break-word; color: {{ object.title_color }};">
+          {{ object.title }}<!--REITOP BENEFITs-->
+        </span>
+      </h3>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="half-cont">
+      <div class="half-left">
+        {% check_img item1.background_image.url as bg_type1 %}
+        {% static 'img/svg/Own_Investment_Icon.svg' as default_icon1 %}
+        {% include 'page_parts/benefit_item.html' with object=item1 bg_type=bg_type1 default_icon=default_icon1 %}
+{#<!--        <div class="benefit-item animated replace-zoomIn">-->#}
+{#<!--          <object type="image/svg+xml" data="{% static 'img/svg/Own_Investment_Icon.svg'%}"></object>-->#}
+{#<!--          <h4 class="title">Own Investment Committee</h4>-->#}
+{#<!--          <p>COMPANY nas an investment committee which consists of 12 people. The Investment Committee is responsible for ensuring the management of the Company's portfolio in accordance with its investment objective and policy. Approves the strategy and transactions of the Company. The Investment Committee has significant investment experience in the UK and continental Europe, so you can apply a wide context and apply a consistent and disciplined investment approach in all funds.</p>-->#}
+{#<!--        </div>-->#}
+      </div>
+      <div class="half-right animated replace-zoomIn">
+        {% check_img item2.background_image.url as bg_type2 %}
+        {% static 'img/svg/Own_Investment_Icon.svg' as default_icon2 %}
+        {% include 'page_parts/benefit_item.html' with object=item2 bg_type=bg_type2 default_icon=default_icon2 %}
+{#<!--        <div class="benefit-item">-->#}
+{#<!--          <object type="image/svg+xml" data="{% static 'img/svg/Unique_Policy_Icon.svg'%}"></object>-->#}
+{#<!--          <h4 class="title">Unique investment policy</h4>-->#}
+{#<!--          <p>The uniqueness lies in owning a diversified portfolio of real estate with good fundamental characteristics, as described below. The company invests mainly in the sectors of commercial real estate, including office, retail and industrial, and also invests in other sectors, including mixed use, residential real estate, hotels, healthcare and leisure. A separate area of investment is the purchase of residential real estate and hotels and their rental.</p>-->#}
+{#<!--        </div>-->#}
+      </div>
+    </div>
+    <div class="half-cont">
+      <div class="half-left">
+        {% check_img item3.background_image.url as bg_type3 %}
+        {% static 'img/svg/Own_Investment_Icon.svg' as default_icon3 %}
+        {% include 'page_parts/benefit_item.html' with object=item3 bg_type=bg_type3 default_icon=default_icon3 %}
+{#<!--        <div class="benefit-item animated replace-zoomIn">-->#}
+{#<!--          <object type="image/svg+xml" data="{% static 'img/svg/Diversification_Icon.svg'%}"></object>-->#}
+{#<!--          <h4 class="title">Diversification and Asset Allocation</h4>-->#}
+{#<!--          <p>The Board of Directors believes that in order to maximize the stability of the Company's revenues, the best strategy is to invest in a portfolio of assets diversified by location, sector, asset size and exposure to tenants with low vacancy rates and creditable tenants. The value of any individual asset at the time of its acquisition should not exceed 15% of gross assets, and the share of rental income received from one tenant should not exceed 10%.</p>-->#}
+{#<!--        </div>-->#}
+      </div>
+      <div class="half-right">
+        {% check_img item4.background_image.url as bg_type4 %}
+        {% static 'img/svg/Own_Investment_Icon.svg' as default_icon4 %}
+        {% include 'page_parts/benefit_item.html' with object=item4 bg_type=bg_type4 default_icon=default_icon4 %}
+{#<!--        <div class="benefit-item animated replace-zoomIn">-->#}
+{#<!--          <object type="image/svg+xml" data="{% static 'img/svg/Interest_Rate_Icon.svg'%}"></object>-->#}
+{#<!--          <h4 class="title">Interest rate</h4>-->#}
+{#<!--          <p>The policy of the Board of Directors is to hedge interest rate risk either by securing fixed rate borrowing or by using interest rate swaps / derivatives used exclusively for hedging purposes</p>-->#}
+{#<!--        </div>-->#}
+      </div>
+    </div>
+  </div>
+</div>

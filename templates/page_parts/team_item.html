@@ -1,0 +1,12 @@
+{% load static %}
+{# review goes here #}
+
+<div class="team-item">
+  <div class="team-img" style="background:url('{% if object.image %}{{ object.image.url }}{% else %}{% static "img/team.jpg" %}{% endif %}');background-position:left top;background-size:cover"></div>
+  <div class="team-descr">
+    <div class="name">{{ object.full_name }}</div>
+    <div class="about">{{ object.company }}</div>
+    <div class="line"></div>
+  </div>
+  {{ object.text }}
+</div>

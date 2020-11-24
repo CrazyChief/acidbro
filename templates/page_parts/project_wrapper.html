@@ -1,0 +1,46 @@
+<div class="project">
+  <div class="project-left">
+    <div  class="project-left-cont">
+      <h3 class="title animated replace-fadeInUp" style="color: {{ object.title_color }};">{{ object.title }}</h3>
+      <p class="animated replace-fadeInUp">{{ object.text|safe }}</p>
+      <div class="line-group animated replace-fadeInUp">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      {% if object.navigationlinks_set.all %}
+        {% for item in object.navigationlinks_set.all %}
+          <a href="{{ item.link }}" class="but {% if forloop.counter0 == 0 %}red {% elif forloop.counter0 == 1 %}grey {% endif %}animated replace-fadeInUp">
+          {{ item.name }}
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+    {% if object.use_slider %}
+      <div class="rhombus animated replace-zoomIn" style="animation-duration:2s;">
+        <div class="project-slide">
+          {% for item in object.slider_set.first.slideritem_set.all %}
+            {% if item.publish %}
+              <div class="project-item">
+                <div class="project-title">{{ item.title }}</div>
+                {{ item.text|safe }}
+                {% with item.navigationlinks_set.first as nav_link %}
+                  {% if nav_link %}
+                    <a href="{% if nav_link.page %}{{ nav_link.page.slug }}{% else %}{{ nav_link.link }}{% endif %}">{{ nav_link.name }}</a>
+                  {% endif %}
+                {% endwith %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div class="project-right"
+       style="background: url({% if object.background_image %}{{ object.background_image.url }}{% else %}{% static 'img/svg/project.svg' %}{% endif %}) 0 0 / auto 100% no-repeat;"
+  >
+  </div>
+</div>
