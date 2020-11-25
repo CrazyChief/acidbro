@@ -1,4 +1,4 @@
-$(document).ready(function () {		
+$(document).ready(function () {
 	var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 	var hamburgers = document.querySelectorAll('.hamburger');
 	if (hamburgers.length > 0) {
@@ -17,38 +17,35 @@ $(document).ready(function () {
 		if($('.menu-button-box').hasClass('open')){
 			$('#search').submit();
 			} else {
-			$('.menu-button-box').find(".hamburger").get(0).click();	
+			$('.menu-button-box').find(".hamburger").get(0).click();
 		}
-	});	
+	});
 	$(window).click(function() {
 		$('.menu-button-box').removeClass('open');
 		$('.hamburger').removeClass('is-active');
 	});
-	$('.menu-button-box').on('click', function(e){	
+	$('.menu-button-box').on('click', function(e){
 		e.stopPropagation();
 		if (e.target !== this){
 			return;
 		}
-		$(this).find(".hamburger").get(0).click();		
+		$(this).find(".hamburger").get(0).click();
 	});
 	$('#s-clear').on('click', function() {
 		$('#search input').val('');
 	});
-	
+
 	$('body').scroll(function(){
 		var sticky = $('.menu-button-box'),
 		scroll = $('body').scrollTop();
-		
+
 		if (scroll >= 150) sticky.addClass('scroll');
 		else sticky.removeClass('scroll');
 	});
-	
-	
-	
-	
-	
-    
-	
+
+
+
+
 	$('.project-slide').slick({
 		//autoplay: true,
         autoplaySpeed: 4000,
@@ -65,9 +62,9 @@ $(document).ready(function () {
         arrows: true,
         dots: true
 	});
-	
+
 	$slickMobile = false;
-    function mobSlider(){    
+    function mobSlider(){
         if($(window).width() < 860){
             if(!$slickMobile){
                 $(".news-all").slick({
@@ -89,20 +86,20 @@ $(document).ready(function () {
 	mobSlider();
 	$(window).on('resize', function(){
 		mobSlider();
-	});	
-	$('.resume-but').on('click', function(e){	
+	});
+	$('.resume-but').on('click', function(e){
 		$('#submit').modalBox({
 			'width':'90%'
 		});
 		return false;
 	})
-	$('#submit .m-close').on('click', function(e){	
+	$('#submit .m-close').on('click', function(e){
 		$('#submit').modalBox('close');
 		return false;
 	})
 	//scrollbar
 	//jQuery('.table-content .wrapper').scrollbar();
-	
+
 	//vacancies
 	$(document).on('click', '.careers-item .name', function(){
 		if($(window).width() > 800){
@@ -114,8 +111,8 @@ $(document).ready(function () {
 			$(this).toggleClass('open').next('.careers-toggle').slideToggle('slow');
 		}
 	})
-	if($('.careers-left').length){		
-		var fixmeTop = $('.careers-right').offset().top - 50;	
+	if($('.careers-left').length){
+		var fixmeTop = $('.careers-right').offset().top - 50;
 		var fixmebottom = $('footer').offset().top - $(window).height() + 100;
 		$('body').scroll(function() {
 			var currentScroll = $('body').scrollTop();
@@ -135,10 +132,10 @@ $(document).ready(function () {
 					position: 'relative'
 				});
 			}
-		});		
+		});
 	}
-	
-	
+
+
 	//news slider
 	$('.news-slide').slick({
 		autoplay: true,
@@ -162,7 +159,7 @@ $(document).ready(function () {
 			}
 		]
 	});
-	
+
 	//team slider
 	$('.team-slide').slick({
 		autoplay: true,
@@ -180,7 +177,7 @@ $(document).ready(function () {
 			}
 		]
 	});
-	
+
 	//progress bar
 	if($('.facts-progress01').length){
 		var bar01 = new ProgressBar.Circle('.facts-progress01', {
@@ -243,33 +240,33 @@ $(document).ready(function () {
 			$('*[class^="fline"]').addClass('fly');
 		},{context: 'body', offset:'50%'});
 	}
-	
+
 	//tabs
 	$(document).on('click','.tabs-list li:not(.active)', function () {
 		$(this).addClass('active').siblings().removeClass('active')
 		.closest('.tabs').find('.tabs-content').removeClass('active').eq($(this).index()).addClass('active');
 	});
-	
+
 	//portfolio
 	$(document).on('click', '.sector-img', function(){
 		$(this).parent('.sector-item').toggleClass('open').find('.sector-descr').slideToggle('slow');
 	})
-	
+
 	//calculator slider
-	
+
 	$('.calc-rent .calc-slide').on('init', function (event, slick, currentSlide, nextSlide) {
 		window.countSlideRent = slick.slideCount;
-	});	
+	});
 	$('.calc-build .calc-slide').on('init', function (event, slick, currentSlide, nextSlide) {
 		window.countSlideBuild = slick.slideCount;
-	});	
+	});
 	$('.calc-rent .calc-slide,.calc-build .calc-slide').slick({
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		arrows: true,
 		dots: false
 	});
-	
+
 	jQuery('.calc-rent .calc-slide').on('afterChange', function (event, slick, currentSlide, nextSlide) {
 		var i = (currentSlide ? currentSlide : 0) + 1;
 		$(".calc-rent .calc-slider").slider('value',i);
@@ -284,20 +281,20 @@ $(document).ready(function () {
 		value: 1,
 		min: 1,
 		max: window.countSlideBuild,
-		slide: function(event, ui) {		
+		slide: function(event, ui) {
 			$('.calc-build .calc-slide').slick('slickGoTo', ui.value - 1);
 			checkIfStyleChanged('calc-build');
 		}
-	});	
+	});
 	$(".calc-rent .calc-slider").slider({
 		value: 1,
 		min: 1,
 		max: window.countSlideRent,
-		slide: function(event, ui) {		
+		slide: function(event, ui) {
 			$('.calc-rent .calc-slide').slick('slickGoTo', ui.value - 1);
 			checkIfStyleChanged('calc-rent');
 		}
-	});	
+	});
 	$('.calc').slideToggle();
 	$(document).on('click', '.more', function(){
 		$(this).toggleClass('open');
@@ -305,7 +302,7 @@ $(document).ready(function () {
 		$('.calc-slide').slick('setPosition');
 	});
 	function checkIfStyleChanged(parentDiv) {
-		if ($('.'+ parentDiv +' .ui-slider-handle').attr('data-originalstyle') != $('.'+ parentDiv +' .ui-slider-handle').attr('style')) {		
+		if ($('.'+ parentDiv +' .ui-slider-handle').attr('data-originalstyle') != $('.'+ parentDiv +' .ui-slider-handle').attr('style')) {
 			var $width =$('.'+ parentDiv +' .calc-slider').outerWidth() / 100;
 			var $left = parseInt(parseInt($('.'+ parentDiv +" .ui-slider-handle").css("left"), 10) / $width);
 			console.log($left)
@@ -320,7 +317,7 @@ $(document).ready(function () {
 			}
 		}
 	}
-	
+
 	//animate div
 	$('.replace-bounceInUp').waypoint(function(e) {
 		$(this.element).addClass('bounceInUp');
@@ -337,9 +334,9 @@ $(document).ready(function () {
 	$('.replace-zoomIn').waypoint(function(e) {
 		$(this.element).addClass('zoomIn');
 	},{context: 'body', offset:'60%'});
-	
+
 	//animate svg
-	if ($('#BuildTeam').length) {		
+	if ($('#BuildTeam').length) {
 		var c=$("#BuildTeam");c.load("http://45.55.132.244/reit/img/svg/BuildTeam.svg",b);
 		function b(){
 			TweenMax.to("#gear01", 4, {rotation:360, repeat:-1, transformOrigin:"50% 50%", ease:Linear.easeNone});
@@ -348,10 +345,10 @@ $(document).ready(function () {
 			f.set("#coin",{autoAlpha:0})
 			.to("#coin",0.7,{autoAlpha:1})
 			.to("#coin",0.7,{y: 400})
-			
+
 		}
 	}
-	if ($('#YourIncome').length) {		
+	if ($('#YourIncome').length) {
 		var c=$("#YourIncome");c.load("http://45.55.132.244/reit/img/svg/YourIncome.svg",b);
 		function b(){
 			f = new TimelineMax({repeat:-1});
@@ -368,10 +365,10 @@ $(document).ready(function () {
 			.to("#coin05",0.3,{delay:1.6,autoAlpha:0},"coin")
 			.to("#coin06",1.1,{delay:0.5,x:-200},"coin")
 			.to("#coin06",0.3,{delay:1.3,autoAlpha:0},"coin")
-			
+
 		}
 	}
-	if ($('#AttractPartners').length) {		
+	if ($('#AttractPartners').length) {
 		var c=$("#AttractPartners");c.load("http://45.55.132.244/reit/img/svg/AttractPartners.svg",b);
 		function b(){
 			f = new TimelineMax({repeat:-1});
@@ -404,21 +401,21 @@ $(document).ready(function () {
 			.to("#chip13",0.3,{delay:1,autoAlpha:0},"chip")
 		}
 	}
-	
+
 	//img zoom
 	(function($){
-		
+
 		// initialization
 		Zoomify = function (element, options) {
 			var that = this;
-			
+
 			this._zooming = false;
 			this._zoomed  = false;
 			this._timeout = null;
 			this.$shadow  = null;
 			this.$image   = $(element).addClass('zoomify');
 			this.options  = $.extend({}, Zoomify.DEFAULTS, this.$image.data(), options);
-			
+
 			this.$image.on('click', function () { that.zoom(); });
 			$(window).on('resize', function () { that.reposition(); });
 			$(document).on('scroll', function () { that.reposition(); });
@@ -428,7 +425,7 @@ $(document).ready(function () {
 			easing:   'linear',
 			scale:    0.9
 		};
-		
+
 		// css utilities
 		Zoomify.prototype.transition = function ($element, value) {
 			$element.css({
@@ -444,7 +441,7 @@ $(document).ready(function () {
 		};
 		Zoomify.prototype.removeTransition = function ($element, callback) {
 			var that = this;
-			
+
 			clearTimeout(this._timeout);
 			this._timeout = setTimeout(function () {
 				that.transition($element, '');
@@ -465,21 +462,21 @@ $(document).ready(function () {
 			this.transform('scale(' + scale + ') translate(' + translateX + 'px, ' + translateY + 'px)');
 			this.removeTransition(this.$image, callback);
 		};
-		
+
 		// zooming functions
 		Zoomify.prototype.zoom = function () {
 			if (this._zooming) return;
-			
+
 			if (this._zoomed) this.zoomOut();
 			else this.zoomIn();
 		};
 		Zoomify.prototype.zoomIn = function () {
 			var that      = this,
 			transform = this.$image.css('transform');
-			
+
 			this.transition(this.$image, 'none');
 			this.transform('none');
-			
+
 			var offset     = this.$image.offset(),
 			width      = this.$image.outerWidth(),
 			height     = this.$image.outerHeight(),
@@ -492,9 +489,9 @@ $(document).ready(function () {
 			scale      = Math.min(scaleX, scaleY),
 			translateX = (-offset.left + (wWidth - width) / 2) / scale,
 			translateY = (-offset.top + (wHeight - height) / 2 + $(document).scrollTop()) / scale;
-			
+
 			this.transform(transform);
-			
+
 			this._zooming = true;
 			this.$image.addClass('zoomed').trigger('zoom-in.zoomify');
 			setTimeout(function () {
@@ -508,7 +505,7 @@ $(document).ready(function () {
 		};
 		Zoomify.prototype.zoomOut = function () {
 			var that = this;
-			
+
 			this._zooming = true;
 			this.$image.trigger('zoom-out.zoomify');
 			this.transformScaleAndTranslate(1, 0, 0, function () {
@@ -518,7 +515,7 @@ $(document).ready(function () {
 			this.removeShadow();
 			this._zoomed = false;
 		};
-		
+
 		// page listener callbacks
 		Zoomify.prototype.reposition = function () {
 			if (this._zoomed) {
@@ -526,24 +523,24 @@ $(document).ready(function () {
 				this.zoomIn();
 			}
 		};
-		
+
 		// shadow background
 		Zoomify.prototype.addShadow = function () {
 			var that = this;
 			if (this._zoomed) return;
-			
+
 			if (that.$shadow) that.$shadow.remove();
 			this.$shadow = $('<div class="zoomify-shadow"></div>');
 			$('body').append(this.$shadow);
 			this.addTransition(this.$shadow);
 			this.$shadow.on('click', function () { that.zoomOut(); })
-			
+
 			setTimeout(function () { that.$shadow.addClass('zoomed'); }, 10);
 		};
 		Zoomify.prototype.removeShadow = function () {
 			var that = this;
 			if (!this.$shadow) return;
-			
+
 			this.addTransition(this.$shadow);
 			this.$shadow.removeClass('zoomed');
 			this.$image.one('zoom-out-complete.zoomify', function () {
@@ -551,18 +548,18 @@ $(document).ready(function () {
 				that.$shadow = null;
 			});
 		};
-		
+
 		// plugin definition
 		$.fn.zoomify = function (option) {
 			return this.each(function () {
 				var $this   = $(this),
 				zoomify = $this.data('zoomify');
-				
+
 				if (!zoomify) $this.data('zoomify', (zoomify = new Zoomify(this, typeof option == 'object' && option)));
 				if (typeof option == 'string' && ['zoom', 'zoomIn', 'zoomOut', 'reposition'].indexOf(option) >= 0) zoomify[option]();
 			});
 		};
-		
+
 	})(jQuery);
 	$('.sertificate img').zoomify();
-})		
+})

@@ -28,7 +28,9 @@
       {% if menu %}
         <ul>
           {% for item in menu.navigationlinks_set.all %}
-            <li><a href="{{ item.get_link }}">{{ item.name }}</a></li>
+            {% if item.publish %}
+              <li><a href="{{ item.get_link }}">{{ item.name }}</a></li>
+            {% endif %}
           {% endfor %}
         </ul>
       {% endif %}
@@ -65,7 +67,11 @@
       </div>
     </div>
     <div class="head-center">
-      <div class="quadro"><div class="square01 animated bounceInDown"></div><div class="square02 animated bounceInDown"></div><div class="square03 animated bounceInDown"></div></div>
+      <div class="quadro" {% if site_settings %}style="background-color: {{ site_settings.first_background_color }};"{% endif %}>
+        <div class="square01 animated bounceInDown"></div>
+        <div class="square02 animated bounceInDown"></div>
+        <div class="square03 animated bounceInDown"></div>
+      </div>
     </div>
     <div class="head-right animated fadeInRight">
       <div class="head-content-right">
