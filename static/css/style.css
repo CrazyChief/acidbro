@@ -4381,6 +4381,10 @@ div[class^="fline"] {
 		left: 7px;
 		bottom: 7px;
 	}
+	.team-img, .tsm-img {
+		display: block;
+		margin: auto;
+	}
 }
 @media (max-width:520px){
 	.calc-item dt {
