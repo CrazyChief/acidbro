@@ -1,0 +1,30 @@
+{% load static core_tags %}
+
+<div class="careers">
+  <div class="wrapper">
+    <div class="careers-left">
+      {% if object.background_image %}
+        <object type="image/{% check_img object.background_image.url %}" data="{{ object.background_image.url }}"></object>
+      {% else %}
+        <object type="image/svg+xml" data="{% static 'img/svg/careers.svg' %}"></object>
+      {% endif %}
+      <h3 class="title" style="color: {{ object.title_color }};">{{ object.title }}</h3>
+      <div class="line-group">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <p>{{ object.text|safe }}</p>
+    </div>
+    <div class="careers-right">
+      <!--careers_item.html-->
+{#      {% with object.pageblock_set.first as careers %}#}
+        {% for item in object.vacancy_set.all %}
+          {% if item.publish %}
+            {{ item.description|safe }}
+          {% endif %}
+        {% endfor %}
+{#      {% endwith %}#}
+    </div>
+  </div>
+</div>
