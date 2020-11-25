@@ -20,7 +20,7 @@ class PageBlockStackedInline(
     model = PageBlock
     extra = 0
     fields = (
-        'block_type', 'title', 'title_color'
+        'block_type', 'title', 'title_color', 'publish'
     )
     show_change_link = True
 
@@ -30,7 +30,7 @@ class PageBlockStackedInlineExtended(
     model = PageBlock
     extra = 0
     fields = (
-        'block_type', 'title', 'title_color', 'text'
+        'block_type', 'title', 'title_color', 'text', 'publish'
     )
     show_change_link = True
 
@@ -71,7 +71,8 @@ class ReviewStackedInline(SortableInlineAdminMixin, TranslationStackedInline):
     model = Review
     extra = 0
     fields = (
-        'first_name', 'last_name', 'company', 'text', 'position'
+        'first_name', 'last_name', 'company', 'text',
+        'image', 'publish', 'position'
     )
     show_change_link = True
 
@@ -84,20 +85,21 @@ class VacancyAdmin(TabbedTranslationAdmin):
 @admin.register(Review)
 class ReviewAdmin(TabbedTranslationAdmin):
     list_display = [
-        'first_name', 'last_name', 'page_block', 'is_published'
+        'first_name', 'last_name', 'is_published'
     ]
 
 
 @admin.register(Slider)
 class SliderAdmin(TabbedTranslationAdmin):
     list_display = ['type_slider', 'name', 'page_block']
-    inlines = (SliderItemTabularInline,)
+    inlines = (SliderItemTabularInline, ReviewStackedInline)
 
     class Media:
         js = (
             'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
             'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
             'modeltranslation/js/tabbed_translation_fields.js',
+            'js/admin/admin_slider.js',
         )
         css = {
             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
@@ -108,16 +110,15 @@ class SliderAdmin(TabbedTranslationAdmin):
 class PageBlockAdmin(SortableAdminMixin, TabbedTranslationAdmin):
     list_display = ['block_type', 'page_object', 'title', 'is_published']
     fields = (
-        'block_type', 'page_object', 'title', 'title_color', 'text',
-        'background_image', 'use_slider', 'publish'
+        'block_type', 'page_object', 'title', 'title_color', 'subtitle',
+        'text', 'background_image', 'use_slider', 'publish'
     )
     inlines = (
         PageBlockStackedInlineExtended,
         NavigationLinksTabularInline,
         SliderTabularInline,
         NewsStackedInline,
-        VacancyStackedInline,
-        ReviewStackedInline
+        VacancyStackedInline
     )
 
     class Media:
