@@ -6,7 +6,7 @@
     <div class="news-dscr">
       <div class="news-title">{{ object.title }} {{ counter }}</div>
       <div class="news-date">{{ object.created|date:"d.m.Y" }}</div>
-      <p>{{ object.text }}</p>
+      <p>{{ object.text|safe }}</p>
       {% if object.show_more_button %}
         <a href="{{ object.button_link }}" class="but news-link">{{ object.button_text|default:"learn more" }}</a>
       {% endif %}

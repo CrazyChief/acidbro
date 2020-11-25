@@ -227,6 +227,16 @@ class SliderItem(models.Model):
         return f'SliderItem {self.title}'
 
 
+class NewsManager(models.Manager):
+    use_for_related_fields = True
+
+    def get_queryset(self):
+        return super().get_queryset()
+
+    def published(self):
+        return self.get_queryset().filter(publish=True)
+
+
 class News(models.Model):
     title = models.CharField(
         _(u'Заголовок'),
@@ -271,6 +281,8 @@ class News(models.Model):
         blank=True,
         null=True
     )
+
+    objects = NewsManager()
 
     class Meta:
         ordering = ['position']

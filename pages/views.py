@@ -1,6 +1,7 @@
 import os
 
 from django.conf import settings
+from django.core import paginator
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.views.generic import TemplateView
 from django.http import JsonResponse, HttpResponseNotFound
@@ -161,12 +162,25 @@ class PageMixin(TemplateView, MenuMixin, SettingsMixin):
 class IndexView(PageMixin):
 
     template_name = 'base.html'
+    news_paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object'] = self.object
-        # context['menu'] = self.get_menu()
-        pprint(context)
+
+        news_page = self.request.GET.get('news_page')
+        news_wrapper = self.object.pageblock_set.filter(
+            block_type=1, publish=True).first()
+        news = news_wrapper.news_set.published()
+        news_paginator = paginator.Paginator(news, self.news_paginate_by)
+
+        # Catch invalid page numbers
+        try:
+            news_page_obj = news_paginator.page(news_page)
+        except (paginator.PageNotAnInteger, paginator.EmptyPage):
+            news_page_obj = news_paginator.page(1)
+
+        context["news_page_obj"] = news_page_obj
         return context
 
 
