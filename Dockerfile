@@ -39,7 +39,7 @@ RUN chmod +x /usr/src/acidbro/entrypoint.sh
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/src/acidbro/entrypoint.sh"]
+#ENTRYPOINT ["/usr/src/acidbro/entrypoint.sh"]
 
 # This command removes containers with <none> Tag
 # docker rmi $(docker images -q -f dangling=true)
