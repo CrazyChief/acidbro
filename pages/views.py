@@ -168,67 +168,20 @@ class IndexView(PageMixin):
         context = super().get_context_data(**kwargs)
         context['object'] = self.object
 
-        news_page = self.request.GET.get('news_page')
-        news_wrapper = self.object.pageblock_set.filter(
-            block_type=1, publish=True).first()
-        news = news_wrapper.news_set.published()
-        news_paginator = paginator.Paginator(news, self.news_paginate_by)
+        if self.object.template == 3:
+            news_page = self.request.GET.get('news_page')
+            news_wrapper = self.object.pageblock_set.filter(
+                block_type=1, publish=True).first()
+            news = news_wrapper.news_set.published()
+            news_paginator = paginator.Paginator(news, self.news_paginate_by)
 
-        # Catch invalid page numbers
-        try:
-            news_page_obj = news_paginator.page(news_page)
-        except (paginator.PageNotAnInteger, paginator.EmptyPage):
-            news_page_obj = news_paginator.page(1)
+            # Catch invalid page numbers
+            try:
+                news_page_obj = news_paginator.page(news_page)
+            except (paginator.PageNotAnInteger, paginator.EmptyPage):
+                news_page_obj = news_paginator.page(1)
 
-        context["news_page_obj"] = news_page_obj
+            context["news_page_obj"] = news_page_obj
+
         return context
 
-
-# class AboutView(TemplateView):
-#
-#     template_name = 'about.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['object'] = self.get_page(1)
-#         return context
-#
-#
-# class ContactView(TemplateView):
-#
-#     template_name = 'contact.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['object'] = self.get_page(2)
-#         return context
-#
-#
-# class NewsView(TemplateView):
-#
-#     template_name = 'news.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['object'] = self.get_page(3)
-#         return context
-#
-#
-# class PortfolioView(TemplateView):
-#
-#     template_name = 'portfolio.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['object'] = self.get_page(4)
-#         return context
-#
-#
-# class VacanciesView(TemplateView):
-#
-#     template_name = 'vacancies.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['object'] = self.get_page(0)
-#         return context
