@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core import paginator
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.views.generic import TemplateView
-from django.http import JsonResponse, HttpResponseNotFound
+from django.http import JsonResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
 
 from core.models import (
     HeaderSettings, FooterSettings, SiteSettings, NavigationMenu,
@@ -144,8 +144,9 @@ class PageMixin(TemplateView, MenuMixin, SettingsMixin):
                 self.object = Page.objects.get(
                     slug__exact=self.pieces[0], publish=True)
             except ObjectDoesNotExist:
-                return HttpResponseNotFound(
-                    'Oooops, page you a looking for does not exist!')
+                self.object = Page.objects.get(
+                    template__exact=6)
+                return HttpResponseRedirect(self.object.get_absolute_url())
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
