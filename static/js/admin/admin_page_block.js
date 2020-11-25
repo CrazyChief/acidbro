@@ -2,7 +2,7 @@ $(function () {
   // block handlers start
   const wrappersWithNestedBlocks = [4, 5, 7, 9, 10];
   const searchedArray = ['careers', 'investor'];
-  const sets = $('#pageblock_set-group, #news_set-group, #vacancy_set-group, #review_set-group');
+  const sets = $('#pageblock_set-group, #news_set-group, #vacancy_set-group');
 
   sets.fadeOut(500);
 
@@ -24,20 +24,23 @@ $(function () {
   // nested blocks handlers start
   const nestedBlocks = $('#pageblock_set-group');
   const nestedItems = nestedBlocks.find('[id^="pageblock_set"]:not([id$="empty"])');
+
   nestedItems.each((i, e) => {
     $(e).find('[id$="-block_type"]').find('option:not(:last-child)').hide();
   });
+
   $(document).on('click', '#pageblock_set-group .add-row', () => {
     const elements = nestedBlocks.find('[id^="pageblock_set-"]:not([id$="empty"])');
     elements.each((i, e) => {
       $(e).find('[id$="-block_type"]').find('option:not(:last-child)').hide();
     });
   });
+
   $(document).on('change', '[id^="pageblock_set"] [id$="-block_type"]', (e) => {
     const target = $(e.currentTarget);
     const searchedValue = blockType.find(`option[value="${blockType.val()}"]`).text().split('_')[0];
-    // console.log(searchedArray.includes(searchedValue));
-    if (searchedValue === 'investor') {
+
+    if (searchedValue === 'investor' || searchedValue === 'cripto') {
       const $iframe = target.parents('.field-block_type').parent().find('iframe.cke_wysiwyg_frame');
       let root = false;
 
@@ -71,26 +74,31 @@ $(function () {
   $(document).on('click', '#vacancy_set-group .add-row', () => {
     const elements = $('#vacancy_set-group').find('[id^="vacancy_set-"]:not([id$="empty"])');
     const last = $(elements[elements.length - 1]);
+
     setTimeout(() => {
       const description = last.find('fieldset').children();
       const $iframe = $(description[0]).find('iframe.cke_wysiwyg_frame');
       let root = false;
+
       $.ajax({
           type: 'GET',
           url: `/template/fetch/careers/`,
         })
           .done(resp => {
           const data = resp.html;
+
           $iframe.ready(() => {
             // Fill content field with data;
             $iframe.contents().find('body').html('');
             $iframe.contents().find('body').append(data);
+
             if (root === false) {
               root = true;
               const showBlocks = $(description[0]).find('a.cke_button__showblocks');
               showBlocks.click();
               const source = $(description[0]).find('a.cke_button__source');
               source.click();
+
               setTimeout(() => {
                 source.click();
               }, 500);
@@ -104,11 +112,13 @@ $(function () {
   // navigationLinks handlers start
   const navLinksBlock = $('#navigationlinks_set-group');
   const navItems = navLinksBlock.find('[id^="navigationlinks_set"]:not([id$="empty"])');
+
   if (navItems.length > 1) {
     navLinksBlock.find('.add-row').hide();
   } else {
     navLinksBlock.find('.add-row').show();
   }
+
   navItems.each((i, e) => {
     const target = $(e);
     target.find('.field-navigation').hide();
@@ -118,19 +128,23 @@ $(function () {
     target.find('.field-slider_item').hide();
     target.find('.field-link_to').find('select option[value="2"]').hide();
     target.find('.field-link_to').find('select option[value="3"]').hide();
+
     if (+target.find('.field-link_to').find('select').val() === 0) {
       target.find('.field-page').hide();
     } else if (+target.find('.field-link_to').find('select').val() === 1) {
       target.find('.field-link').hide();
     }
   });
+
   $(document).on('click', '#navigationlinks_set-group .add-row', (el) => {
     const elements = navLinksBlock.find('[id^="navigationlinks_set"]:not([id$="empty"])');
+
     if (elements.length > 1) {
       $(el).hide();
     } else {
       $(el).show();
     }
+
     elements.each((i, e) => {
       const target = $(e);
       target.find('.field-navigation').hide();
@@ -142,8 +156,10 @@ $(function () {
       target.find('.field-link_to').find('select option[value="3"]').hide();
     });
   });
+
   $(document).on('change', '[id^="navigationlinks_set"] [id$="-link_to"]', (e) => {
     const target = $(`#${e.currentTarget.id}`);
+
     if (+target.val() === 0) {
       target.parents('.field-link_to').parent().find('.field-page').fadeOut(500);
       target.parents('.field-link_to').parent().find('.field-link').fadeIn(500);
@@ -158,6 +174,7 @@ $(function () {
   // slider handlers start
   const sliderGroup = $('#slider_set-group');
   const sliderItems = sliderGroup.find('[id^="slider_set"]:not([id$="empty"]');
+
   if (sliderItems.length > 0) {
     sliderGroup.find('.add-row').hide();
   } else {
@@ -203,7 +220,6 @@ handleFormSets = (e, sets, wrappersWithNestedBlocks) => {
     } else if (+e.value === 6) {
       $('.field-use_slider').fadeIn(500);
     } else if (+e.value === 8) {
-      $('#review_set-group').fadeIn(500);
       $('.field-use_slider').fadeIn(500);
     }
     // else if (+e.value === 11) {

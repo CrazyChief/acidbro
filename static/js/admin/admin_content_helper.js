@@ -10,13 +10,13 @@
       const option = target.find(`option[value="${selectVal}"]`);
       const selectedTemplate = option.text();
       let agree = false;
-      if (first !== null) {
-        agree = confirm('Are you sure that you want to change content structure?');
-        if (!agree) {
-          $(e.currentTarget).val(first);
-          return;
-        }
-      }
+      // if (first !== null) {
+      //   agree = confirm('Are you sure that you want to change content structure?');
+      //   if (!agree) {
+      //     $(e.currentTarget).val(first);
+      //     return;
+      //   }
+      // }
       first = selectedTemplate;
       const $iframe = $('iframe.cke_wysiwyg_frame');
 
