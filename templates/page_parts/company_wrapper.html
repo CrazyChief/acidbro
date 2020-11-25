@@ -1,4 +1,4 @@
-{% load static %}
+{% load static core_tags %}
 
 <div class="company replace-fadeInUp">
   <div class="wrapper">
@@ -9,7 +9,7 @@
         <div class="line"></div>
         <span>{{ object.subtitle }}</span>
         {% with object.navigationlinks_set.first as nav_link %}
-          {% if nav_link %}
+          {% if nav_link and nav_link.publish %}
             <a href="{{ nav_link.get_link }}" class="but head-link">{{ nav_link.name }}</a>
           {% endif %}
         {% endwith %}
