@@ -1,28 +1,8 @@
-{% load i18n static %}
+{% load i18n static core_tags %}
 
-{% block page_content %}
-  <div class="careers">
-    <div class="wrapper">
-      <div class="careers-left">
-        <object type="image/svg+xml" data="img/svg/careers.svg"></object>
-        <h3 class="title">REITOP is actively looking for specialists in the different areas</h3>
-        <div class="line-group">
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
-        </div>
-        <p>You have a chance to make your
-          carrier in big project in high level
-        of development and profit</p>
-      </div>
-      <div class="careers-right">
-        <!--careers_item.html-->
-        {% if object_list %}
-          {% for item in object_list %}
-            {% include 'page_parts/careers_item.html' with site_settings=site_settings object=item %}
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-  </div>
-{% endblock %}
+{% with object.pageblock_set.published as blocks %}
+  {% for block in blocks %}
+    {% retrieve_template block as template_name %}
+    {% include template_name with site_settings=site_settings object=block %}
+  {% endfor %}
+{% endwith %}
