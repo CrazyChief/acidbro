@@ -159,7 +159,7 @@
     </div>
     {{ footer_settings.text|safe }}
     <ul class="sup-links">
-      <li>© {{ footer_settings.copyright_text }} {% now 'M' %}</li>
+      <li>© {{ footer_settings.copyright_text }} {% now 'Y' %}</li>
       {% for item in footer_menu.navigationlinks_set.all %}
         {% if item.publish %}
           <li><a href="{{ item.get_link }}">{{ item.name }}</a></li>
