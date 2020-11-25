@@ -1,43 +1,13 @@
-{% load i18n static %}
+{% load i18n static core_tags %}
 
 {% block page_content %}
+
+  {% with object.pageblock_set.published as blocks %}
 <!--title, description, link, image of project-->
-  <div class="sector">
-    <div class="wrapper">
-      <div class="half-cont">
-        <div class="half-left">
-          <h3 class="title animated replace-fadeInUp" style="color: {{ object.title_color }};">{{ object.title }}</h3>
-        </div>
-        <div class="half-right">
-          <p class="animated replace-fadeInUp">{{ object.text|safe }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="sector-all">
-      <div class="half-cont wrapper">
-        <div class="half-left">
-          <!--sector_item.html-->
-          <div class="sector-item animated replace-bounceInUp" style="animation-duration:2s;">
-            <div class="sector-img" style="background:url({% static 'img/sector.jpg' %})"></div>
-            <div class="sector-name">Commerce  <span>36%</span></div>
-            <div class="sector-descr">The Company owns a range of industrial assets, the most significant being
-              multi-let estates including Milton Keynes and Leeds, which are positively
-              impacted by structural trends and where there are significant asset
-            management opportunities to capture rental growth.</div>
-          </div>
-        </div>
-        <div class="half-right">
-          <!--sector_item.html-->
-          <div class="sector-item animated replace-bounceInUp" style="animation-delay:0.5s;" style="animation-duration:2s;">
-            <div class="sector-img" style="background:url({% static 'img/sector.jpg' %})"></div>
-            <div class="sector-name">Commerce  <span>36%</span></div>
-            <div class="sector-descr">The Company owns a range of industrial assets, the most significant being
-              multi-let estates including Milton Keynes and Leeds, which are positively
-              impacted by structural trends and where there are significant asset
-            management opportunities to capture rental growth.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    {% for block in blocks %}
+      {% retrieve_template block as template_name %}
+      {% include template_name with site_settings=site_settings object=block %}
+    {% endfor %}
+{#    {% include 'page_parts/sector_wrapper.html' with site_settings=site_settings object=object %}#}
+  {% endwith %}
 {% endblock %}

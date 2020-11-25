@@ -1,46 +1,52 @@
-{% load i18n static %}
+{% load i18n static core_tags %}
 
 {% block page_content %}
 <!--second_wrapper.html-->
-<div class="second">
-  <div class="wrapper">
-    <h3 id="work"class="title underl animated replace-fadeInUp">How it works?</h3>
-    <object type="image/svg+xml" data="{% static 'img/svg/about.svg'%}"></object>
-    <div class="half-cont">
-      <div class="half-left" >
-        <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/deposite.svg'%}"></object>
-        <p class="animated replace-fadeInUp"><span>DEPOSITED</span>  funds are transferred and pooled in a joint company investment wallet. A specific share size is allocated to each deposit, directly proportionate to the amount invested compared to the total size of the joint investment wallet. This share size is utilized as a determining factor for the Return On Investment for each contribution. The funds in the joint investment wallet are used by our team of expert traders and business consultants to invest in various diversified ventures. These investments are split into multiple portfolios in order to boost the efficiency of our investments and to insulate potential financial risks from effecting all fun</p>
-      </div>
-      <div class="half-right" >
-        <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/income.svg'%}"></object>
-        <p class="animated replace-fadeInUp">THE INCOME  and dividends are returned to each investors personal account according to the share size designated in the start of the investment fund pooling process. This guarantees highest possible investment security without compromising the ease of platform use for our clients. Furthermore, regardless of us managing all the investing actions, the client stays in control of their fund at all times, able to operate with them freely and continuously. Each client is free to withdraw their funds and conclude their investing activity at any time. No contract locks or hidden loopholes.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 <!--company_wrapper.html-->
-<div class="company replace-fadeInUp">
-  <div class="wrapper">
-    <div class="half-cont">
-      <div class="half-left animated replace-fadeInLeft">
-        <h3 class="title">The Company</h3>
-        <p>The company is registered in the UK. Owners are Name1
-          Surname1 and Name2 Surname2. The authorized capital
-          of the company is 100 million pounds and is officially
-          indicated in the registration documents of the company.
-          The authorized capital is the guarantor of the company
-        to fulfill these obligations</p>
-        <div class="line"></div>
-        <span>You can read the company documents on the UK government website</span>
-          <a href="" class="but head-link">Proceed to site</a>
-        </div>
-        <div class="half-right animated replace-fadeInRight">
-          <div class="sertificate">
-            <img src="{% static 'img/doc.jpg'%}" alt="" />
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
+  {% with object.pageblock_set.published as blocks %}
+    {% for block in blocks %}
+      {% retrieve_template block as template_name %}
+      {% include template_name with site_settings=site_settings object=block %}
+    {% endfor %}
+  {% endwith %}
+{#<div class="second">#}
+{#  <div class="wrapper">#}
+{#    <h3 id="work" class="title underl animated replace-fadeInUp">How it works?</h3>#}
+{#    <object type="image/svg+xml" data="{% static 'img/svg/about.svg'%}"></object>#}
+{#    <div class="half-cont">#}
+{#      <div class="half-left" >#}
+{#        <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/deposite.svg'%}"></object>#}
+{#        <p class="animated replace-fadeInUp"><span>DEPOSITED</span>  funds are transferred and pooled in a joint company investment wallet. A specific share size is allocated to each deposit, directly proportionate to the amount invested compared to the total size of the joint investment wallet. This share size is utilized as a determining factor for the Return On Investment for each contribution. The funds in the joint investment wallet are used by our team of expert traders and business consultants to invest in various diversified ventures. These investments are split into multiple portfolios in order to boost the efficiency of our investments and to insulate potential financial risks from effecting all fun</p>#}
+{#      </div>#}
+{#      <div class="half-right" >#}
+{#        <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/income.svg'%}"></object>#}
+{#        <p class="animated replace-fadeInUp">THE INCOME  and dividends are returned to each investors personal account according to the share size designated in the start of the investment fund pooling process. This guarantees highest possible investment security without compromising the ease of platform use for our clients. Furthermore, regardless of us managing all the investing actions, the client stays in control of their fund at all times, able to operate with them freely and continuously. Each client is free to withdraw their funds and conclude their investing activity at any time. No contract locks or hidden loopholes.#}
+{#        </p>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{#<div class="company replace-fadeInUp">#}
+{#  <div class="wrapper">#}
+{#    <div class="half-cont">#}
+{#      <div class="half-left animated replace-fadeInLeft">#}
+{#        <h3 class="title">The Company</h3>#}
+{#        <p>The company is registered in the UK. Owners are Name1#}
+{#          Surname1 and Name2 Surname2. The authorized capital#}
+{#          of the company is 100 million pounds and is officially#}
+{#          indicated in the registration documents of the company.#}
+{#          The authorized capital is the guarantor of the company#}
+{#        to fulfill these obligations</p>#}
+{#        <div class="line"></div>#}
+{#        <span>You can read the company documents on the UK government website</span>#}
+{#          <a href="" class="but head-link">Proceed to site</a>#}
+{#        </div>#}
+{#        <div class="half-right animated replace-fadeInRight">#}
+{#          <div class="sertificate">#}
+{#            <img src="{% static 'img/doc.jpg'%}" alt="" />#}
+{#          </div>#}
+{#        </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
 {% endblock %}

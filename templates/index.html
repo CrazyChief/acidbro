@@ -1,11 +1,9 @@
 {% load i18n static core_tags %}
 
 <!--project_wrapper.html-->
-{% with object.pageblock_set.all as blocks %}
+{% with object.pageblock_set.published as blocks %}
   {% for block in blocks %}
-    {% if block.publish %}
-      {% retrieve_template block as template_name %}
-      {% include template_name with site_settings=site_settings object=block %}
-    {% endif %}
+    {% retrieve_template block as template_name %}
+    {% include template_name with site_settings=site_settings object=block %}
   {% endfor %}
 {% endwith %}
