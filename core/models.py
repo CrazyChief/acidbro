@@ -20,6 +20,12 @@ class SiteSettings(models.Model):
         _(u'Логотип сайта'),
         upload_to=image_path,
     )
+    preloader = models.ImageField(
+        _(u'Прелоадер сайта'),
+        upload_to=image_path,
+        null=True,
+        blank=True
+    )
     first_background_color = ColorField(
         _(u'Первый цвет фона'),
         default='#FFFFFF'

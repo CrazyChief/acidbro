@@ -63,7 +63,7 @@
 
 <div id="loader">
   <div class="inner">
-    <img src="{% static 'img/loader.jpg' %}">
+    <img src="{% if site_settings.preloader %}{{ site_settings.preloader.url }}{% else %}{% static 'img/loader.jpg' %}{% endif %}">
   </div>
 </div>
 
@@ -219,7 +219,9 @@
   <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
   <script type="application/javascript">
     $(document).ready(() => {
-      $('#loader').fadeOut(2000);
+      setTimeout(() => {
+        $('#loader').fadeOut(1000);
+      }, 1000);
     });
   </script>
   <script src="{% static 'slick/slick.min.js'%}"></script>
