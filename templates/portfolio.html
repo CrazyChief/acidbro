@@ -1,13 +1,10 @@
 {% load i18n static core_tags %}
 
-{% block page_content %}
-
-  {% with object.pageblock_set.published as blocks %}
+{% with object.pageblock_set.published as blocks %}
 <!--title, description, link, image of project-->
-    {% for block in blocks %}
-      {% retrieve_template block as template_name %}
-      {% include template_name with site_settings=site_settings object=block %}
-    {% endfor %}
+  {% for block in blocks %}
+    {% retrieve_template block as template_name %}
+    {% include template_name with site_settings=site_settings object=block %}
+  {% endfor %}
 {#    {% include 'page_parts/sector_wrapper.html' with site_settings=site_settings object=object %}#}
-  {% endwith %}
-{% endblock %}
+{% endwith %}
