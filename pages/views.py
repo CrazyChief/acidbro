@@ -138,7 +138,9 @@ class PageMixin(TemplateView, MenuMixin, SettingsMixin):
                 self.object = Page.objects.get(
                     template__exact=0, publish=True)
             except ObjectDoesNotExist:
-                self.object = None
+                self.object = Page.objects.get(
+                    template__exact=6)
+                return HttpResponseRedirect(self.object.get_absolute_url())
         else:
             try:
                 self.object = Page.objects.get(
