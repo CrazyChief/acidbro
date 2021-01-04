@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="project">
   <div class="project-left">
     <div  class="project-left-cont">
@@ -40,7 +42,7 @@
     {% endif %}
   </div>
   <div class="project-right"
-       style="background: url({% if object.background_image %}{{ object.background_image.url }}{% else %}{% static 'img/svg/project.svg' %}{% endif %}) 0 0 / auto 100% no-repeat;"
+       style="background: url({% if object.background_image %}{{ object.background_image.url }}{% else %}{% static 'img/svg/investor.svg' %}{% endif %}) 0 0 / auto 100% no-repeat;"
   >
   </div>
 </div>

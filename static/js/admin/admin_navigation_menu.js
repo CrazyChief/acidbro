@@ -11,17 +11,17 @@
       toggleFooter();
     });
 
-    $(document).on('change', '[id$="-link_to"]', (e) => {
-      const target = $(e.currentTarget);
+    $(document).on('change', '[id$="-link_to"]', (el) => {
+      const target = $(el.currentTarget);
       const options = target.find('option');
       options.each((i, e) => {
         if ($(e).css('display') !== 'none') {
           if ($(e).val() === "0" && e.selected) {
-            target.parents('fieldset').find('.field-link').show();
-            target.parents('fieldset').find('.field-page').hide();
+            target.parents('.field-link_to').parent().find('.field-link').show();
+            target.parents('.field-link_to').parent().find('.field-page').hide();
           } else if ($(e).val() === "1" && e.selected) {
-            target.parents('fieldset').find('.field-link').hide();
-            target.parents('fieldset').find('.field-page').show();
+            target.parents('.field-link_to').parent().find('.field-link').hide();
+            target.parents('.field-link_to').parent().find('.field-page').show();
           }
         }
       });

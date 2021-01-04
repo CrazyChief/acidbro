@@ -5,9 +5,11 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
-  <title>Title {{ LANGUAGE_CODE }}</title>
+  <title>{{ object.page_title }}</title>
+  <meta name="keywords" content="{{ object.page_keywords }}" />
+  <meta name="description" content="{{ object.page_description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ site_settings.favicon.url }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% if site_settings.favicon %}{{ site_settings.favicon.url }}{% endif %}">
 
   {% block css %}
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
@@ -17,10 +19,53 @@
     <link rel="stylesheet" href="{% static 'slick/slick-theme.css' %}" />
   {% endblock %}
 
+  <style>
+    #loader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 1000000;
+    }
+    #loader .inner {
+      position: relative;
+      display: block;
+      width: 15%;
+      height: 15%;
+      margin: auto;
+    }
+    #loader .inner img {
+      display: block;
+      width: 100%;
+      height: auto;
+      animation: zoomInOut 1s infinite;
+    }
+    @keyframes zoomInOut {
+      10% {
+        transform: scale(1.1);
+      }
+      50% {
+        transform: scale(1.3);
+      }
+      90% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+
   {% block extra_css %}
   {% endblock %}
 </head>
 <body class="main-page">
+
+<div id="loader">
+  <div class="inner">
+    <img src="{% if site_settings.preloader %}{{ site_settings.preloader.url }}{% else %}{% static 'img/loader.jpg' %}{% endif %}">
+  </div>
+</div>
 
 <header>
   <div class="menu-button-box animated fadeInDown">
@@ -28,7 +73,9 @@
       {% if menu %}
         <ul>
           {% for item in menu.navigationlinks_set.all %}
-            <li><a href="{{ item.get_link }}">{{ item.name }}</a></li>
+            {% if item.publish %}
+              <li><a href="{{ item.get_link }}">{{ item.name }}</a></li>
+            {% endif %}
           {% endfor %}
         </ul>
       {% endif %}
@@ -65,7 +112,11 @@
       </div>
     </div>
     <div class="head-center">
-      <div class="quadro"><div class="square01 animated bounceInDown"></div><div class="square02 animated bounceInDown"></div><div class="square03 animated bounceInDown"></div></div>
+      <div class="quadro" {% if site_settings %}style="background-color: {{ site_settings.first_background_color }};"{% endif %}>
+        <div class="square01 animated bounceInDown"></div>
+        <div class="square02 animated bounceInDown"></div>
+        <div class="square03 animated bounceInDown"></div>
+      </div>
     </div>
     <div class="head-right animated fadeInRight">
       <div class="head-content-right">
@@ -153,7 +204,7 @@
     </div>
     {{ footer_settings.text|safe }}
     <ul class="sup-links">
-      <li>© {{ footer_settings.copyright_text }} {% now 'M' %}</li>
+      <li>© {{ footer_settings.copyright_text }} {% now 'Y' %}</li>
       {% for item in footer_menu.navigationlinks_set.all %}
         {% if item.publish %}
           <li><a href="{{ item.get_link }}">{{ item.name }}</a></li>
@@ -166,6 +217,13 @@
 
 {% block js %}
   <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
+  <script type="application/javascript">
+    $(document).ready(() => {
+      setTimeout(() => {
+        $('#loader').fadeOut(1000);
+      }, 1000);
+    });
+  </script>
   <script src="{% static 'slick/slick.min.js'%}"></script>
   <script src="{% static 'js/jquery-ui.min.js'%}"></script>
   <script src="{% static 'js/jquery.waypoints.min.js'%}"></script>

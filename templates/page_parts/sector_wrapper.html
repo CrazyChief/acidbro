@@ -1,0 +1,28 @@
+{% load static core_tags %}
+
+<div class="sector">
+  <div class="wrapper">
+    <div class="half-cont">
+      <div class="half-left">
+        <h3 class="title animated replace-fadeInUp" style="color: {{ object.title_color }};">{{ object.title }}</h3>
+      </div>
+      <div class="half-right">
+        <p class="animated replace-fadeInUp">{{ object.text|safe }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="sector-all">
+    {% divide_by_pairs object.pageblock_set.published as pairs %}
+    {% for elements in pairs %}
+    <div class="half-cont wrapper">
+      {% for item in elements %}
+        {% odd_even forloop.counter0 as ov %}
+        <div class="half-{% if ov == 1 %}right{% else %}left{% endif %}">
+          <!--sector_item.html-->
+          {% include 'page_parts/sector_item.html' with object=item %}
+        </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>

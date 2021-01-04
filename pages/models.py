@@ -57,6 +57,16 @@ class Page(SeoMeta, HeaderSettings):
     is_published.short_description = _(u'Опубликовано?')
 
 
+class PageBlockManager(models.Manager):
+    use_for_related_fields = True
+
+    def get_queryset(self):
+        return super().get_queryset()
+
+    def published(self):
+        return self.get_queryset().filter(publish=True)
+
+
 class PageBlock(models.Model):
     PAGE_BLOCK_TYPE = (
         (0, 'careers_wrapper'),
@@ -127,6 +137,8 @@ class PageBlock(models.Model):
         blank=True,
         null=True
     )
+
+    objects = PageBlockManager()
 
     class Meta:
         ordering = ['position']
@@ -215,6 +227,16 @@ class SliderItem(models.Model):
         return f'SliderItem {self.title}'
 
 
+class NewsManager(models.Manager):
+    use_for_related_fields = True
+
+    def get_queryset(self):
+        return super().get_queryset()
+
+    def published(self):
+        return self.get_queryset().filter(publish=True)
+
+
 class News(models.Model):
     title = models.CharField(
         _(u'Заголовок'),
@@ -259,6 +281,8 @@ class News(models.Model):
         blank=True,
         null=True
     )
+
+    objects = NewsManager()
 
     class Meta:
         ordering = ['position']
@@ -335,8 +359,8 @@ class Review(models.Model):
     text = RichTextField(
         _(u'Текст отзыва')
     )
-    page_block = models.ForeignKey(
-        to=PageBlock,
+    slider = models.ForeignKey(
+        to=Slider,
         on_delete=models.SET_NULL,
         blank=True,
         null=True

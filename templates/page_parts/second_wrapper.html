@@ -8,16 +8,25 @@
     {% else %}
       <object type="image/svg+xml" data="{% static 'img/svg/about.svg'%}"></object>
     {% endif %}
+    {% divide_by_pairs object.pageblock_set.published as pairs %}
+    {% for elements in pairs %}
     <div class="half-cont">
-      <div class="half-left">
-        <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/deposite.svg'%}"></object>
-        <p class="animated replace-fadeInUp"><span>DEPOSITED</span>  funds are transferred and pooled in a joint company investment wallet. A specific share size is allocated to each deposit, directly proportionate to the amount invested compared to the total size of the joint investment wallet. This share size is utilized as a determining factor for the Return On Investment for each contribution. The funds in the joint investment wallet are used by our team of expert traders and business consultants to invest in various diversified ventures. These investments are split into multiple portfolios in order to boost the efficiency of our investments and to insulate potential financial risks from effecting all fun</p>
-      </div>
-      <div class="half-right">
-        <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/income.svg'%}"></object>
-        <p class="animated replace-fadeInUp">THE INCOME  and dividends are returned to each investors personal account according to the share size designated in the start of the investment fund pooling process. This guarantees highest possible investment security without compromising the ease of platform use for our clients. Furthermore, regardless of us managing all the investing actions, the client stays in control of their fund at all times, able to operate with them freely and continuously. Each client is free to withdraw their funds and conclude their investing activity at any time. No contract locks or hidden loopholes.
-        </p>
-      </div>
+      {% for item in elements %}
+        {% odd_even forloop.counter0 as ov %}
+        <div class="half-{% if ov == 1 %}right{% else %}left{% endif %}">
+        {% if item.background_image %}
+          <object type="image/{% check_img item.background_image.url %}" class="animated replace-fadeInUp" data="{{ item.background_image.url }}"></object>
+        {% else %}
+          {% if ov == 1 %}
+            <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/income.svg'%}"></object>
+          {% else %}
+          <object type="image/svg+xml" class="animated replace-fadeInUp" data="{% static 'img/svg/deposite.svg'%}"></object>
+          {% endif %}
+        {% endif %}
+          <p class="animated replace-fadeInUp">{{ item.text|safe }}</p>
+        </div>
+      {% endfor %}
     </div>
+  {% endfor %}
   </div>
 </div>

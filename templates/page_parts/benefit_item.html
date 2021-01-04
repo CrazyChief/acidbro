@@ -1,6 +1,8 @@
+{% load core_tags %}
+
 <div class="benefit-item animated replace-zoomIn">
   {% if object.background_image %}
-    <object type="image/{{ bg_type }}" data="{{ object.background_image.url }}"></object>
+    <object type="image/{% check_img object.background_image.url %}" data="{{ object.background_image.url }}"></object>
   {% else %}
     <object type="image/svg+xml" data="{{ default_icon }}"></object>
   {% endif %}

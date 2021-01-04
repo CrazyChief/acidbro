@@ -36,7 +36,7 @@ class HeaderSettingsAdminMixin(object):
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
-    pass
+    fields = ('favicon', 'logo', 'preloader')
 
 
 @admin.register(FooterSettings)
