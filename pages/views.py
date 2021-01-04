@@ -125,13 +125,11 @@ class PageMixin(TemplateView, MenuMixin, SettingsMixin):
         self.object_type = None
 
     def get(self, request, *args, **kwargs):
-        print('\n\n\nDEBUG:')
         self.pieces = [
             x for x in request.META["PATH_INFO"].split('/')
             if x != ''
         ]
         self.pieces.pop(0)
-        print(self.pieces)
         if len(self.pieces) == 0:
             try:
                 self.object = Page.objects.get(
