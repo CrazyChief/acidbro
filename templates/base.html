@@ -5,7 +5,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
-  <title>{{ object.page_title }}</title>
+  <title>{% if object.page_title %}{{ object.page_title }}{% else %}{{ object.name }}{% endif %}</title>
   <meta name="keywords" content="{{ object.page_keywords }}" />
   <meta name="description" content="{{ object.page_description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
