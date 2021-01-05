@@ -111,29 +111,29 @@ $(document).ready(function () {
 			$(this).toggleClass('open').next('.careers-toggle').slideToggle('slow');
 		}
 	})
-	if($('.careers-left').length){
-		var fixmeTop = $('.careers-right').offset().top - 50;
-		var fixmebottom = $('footer').offset().top - $(window).height() + 100;
-		$('body').scroll(function() {
-			var currentScroll = $('body').scrollTop();
-			if (currentScroll > fixmebottom && $(window).width() > 1000) {
-				$('.careers-left').css({
-					position: 'absolute',
-					bottom: '100px',
-					top: 'auto'
-				});
-				} else if (currentScroll >= fixmeTop && $(window).width() > 1000) {
-				$('.careers-left').css({
-					position: 'fixed',
-					top: '50px'
-				});
-				} else {
-				$('.careers-left').css({
-					position: 'relative'
-				});
-			}
-		});
-	}
+	// if($('.careers-left').length){
+	// 	var fixmeTop = $('.careers-right').offset().top - 50;
+	// 	var fixmebottom = $('footer').offset().top - $(window).height() + 100;
+	// 	$('body').scroll(function() {
+	// 		var currentScroll = $('body').scrollTop();
+	// 		if (currentScroll > fixmebottom && $(window).width() > 1000) {
+	// 			$('.careers-left').css({
+	// 				position: 'absolute',
+	// 				bottom: '100px',
+	// 				top: 'auto'
+	// 			});
+	// 			} else if (currentScroll >= fixmeTop && $(window).width() > 1000) {
+	// 			$('.careers-left').css({
+	// 				position: 'fixed',
+	// 				top: '50px'
+	// 			});
+	// 			} else {
+	// 			$('.careers-left').css({
+	// 				position: 'relative'
+	// 			});
+	// 		}
+	// 	});
+	// }
 
 
 	//news slider
