@@ -606,7 +606,9 @@ header .half-right{
 	color:#fff;
 }
 .banner-info{
+	max-height: 650px;
 	margin-top: 290px;
+	overflow-y: scroll;
 }
 header .title{
 	font-family: 'montserratbold';
@@ -4157,6 +4159,7 @@ div[class^="fline"] {
 	}
 	.banner-info {
 		margin-top: 150px;
+		max-height: 500px;
 	}
 	.about-page .banner-info {
 		margin-top: 140px;
