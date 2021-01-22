@@ -6,7 +6,7 @@
     {{ object.children.first.text|safe }}
   </div>
   {% if object.background_image %}
-    <object type="image/{% check_img object.background_image %}" data="{{ object.background_image.url }}"></object>
+    <object type="image/{% check_img object.background_image.url %}" data="{{ object.background_image.url }}"></object>
   {% else %}
     <object type="image/svg+xml" data="{% static 'img/svg/cripto.svg'%}"></object>
   {% endif %}
